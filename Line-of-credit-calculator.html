@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Line Calculator</title>
+    <style>
+        :root {
+            --primary-color: #4338ca;
+            --primary-hover: #3730a3;
+            --secondary-color: #e5e7eb;
+            --success-color: #059669;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #e0e7ff 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .calculator-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            padding: 2rem;
+            color: var(--white);
+        }
+
+        .calculator-body {
+            padding: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .currency {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            padding-left: 2rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .results {
+            margin-top: 3rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .summary-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .summary-card p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .calculator-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator-card">
+            <div class="header">
+                <h1>Credit Line Calculator</h1>
+            </div>
+            <div class="calculator-body">
+                <form id="creditForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="creditLimit">Credit Limit</label>
+                            <div class="input-group">
+                                <span class="currency">$</span>
+                                <input type="text" id="creditLimit" required placeholder="Enter credit limit">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <input type="number" id="interestRate" required min="0.1" step="0.1" placeholder="Enter interest rate">
+                        </div>
+                        <div class="form-group">
+                            <label for="amountDrawn">Amount Drawn</label>
+                            <div class="input-group">
+                                <span class="currency">$</span>
+                                <input type="text" id="amountDrawn" required placeholder="Enter amount drawn">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+
+                <div id="results" class="results hidden">
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <h3>Interest Payment</h3>
+                            <p id="interestPayment">$0.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Available Credit</h3>
+                            <p id="availableCredit">$0.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Credit Used</h3>
+                            <p id="creditUsed">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Format currency inputs with commas
+            const currencyInputs = ['creditLimit', 'amountDrawn'];
+            currencyInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                input.addEventListener('input', function(e) {
+                    // Remove any non-numeric characters
+                    let value = this.value.replace(/[^\d]/g, '');
+                    // Format with commas
+                    if (value) {
+                        value = parseInt(value).toLocaleString('en-US');
+                    }
+                    this.value = value;
+                });
+            });
+
+            // Form submission handler
+            document.getElementById('creditForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateCredit();
+            });
+
+            // Reset button handler
+            document.getElementById('resetBtn').addEventListener('click', resetCalculator);
+
+            function calculateCredit() {
+                // Get input values
+                const creditLimit = parseFloat(document.getElementById('creditLimit').value.replace(/,/g, ''));
+                const interestRate = parseFloat(document.getElementById('interestRate').value);
+                const amountDrawn = parseFloat(document.getElementById('amountDrawn').value.replace(/,/g, ''));
+
+                // Validate inputs
+                if (!creditLimit || !interestRate || !amountDrawn) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                if (creditLimit <= 0 || interestRate <= 0 || amountDrawn < 0) {
+                    alert('Please enter valid positive numbers');
+                    return;
+                }
+
+                if (amountDrawn > creditLimit) {
+                    alert('Amount drawn cannot exceed credit limit');
+                    return;
+                }
+
+                // Calculate results
+                const monthlyInterestRate = interestRate / 100 / 12;
+                const interestPayment = amountDrawn * monthlyInterestRate;
+                const availableCredit = creditLimit - amountDrawn;
+
+                // Display results
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('interestPayment').textContent = formatCurrency(interestPayment);
+                document.getElementById('availableCredit').textContent = formatCurrency(availableCredit);
+                document.getElementById('creditUsed').textContent = formatCurrency(amountDrawn);
+
+                // Scroll to results
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function resetCalculator() {
+                // Reset form and hide results
+                document.getElementById('creditForm').reset();
+                document.getElementById('results').classList.add('hidden');
+            }
+
+            function formatCurrency(number) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(number);
+            }
+        });
+    </script>
+</body>
+</html>

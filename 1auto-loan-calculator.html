@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Loan Calculator</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #059669;
+            --background-color: #f1f5f9;
+            --card-background: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .calculator-card {
+            background: var(--card-background);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .calculator-body {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency {
+            position: absolute;
+            left: 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        .percentage {
+            position: absolute;
+            right: 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        select {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            padding-left: 2rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .results {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        .results.hidden {
+            display: none;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .summary-card h3 {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .payment-schedule {
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--background-color);
+            font-weight: 600;
+        }
+
+        .download-btn {
+            margin-top: 1rem;
+            background: var(--success-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            background: #047857;
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .calculator-body {
+                padding: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator-card">
+            <div class="header">
+                <h1>Auto Loan Calculator</h1>
+            </div>
+            <div class="calculator-body">
+                <form id="autoLoanForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="loanType">Loan Type</label>
+                            <select id="loanType" required>
+                                <option value="chp">Corporate Hire Purchase (CHP)</option>
+                                <option value="lease">Lease</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehiclePrice">Vehicle Price</label>
+                            <div class="input-group">
+                                <span class="currency">$</span>
+                                <input type="text" id="vehiclePrice" required placeholder="Enter vehicle price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="downPayment">Down Payment</label>
+                            <div class="input-group">
+                                <span class="currency">$</span>
+                                <input type="text" id="downPayment" required placeholder="Enter down payment">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="balloonPercentage">Balloon Payment (%)</label>
+                            <div class="input-group">
+                                <input type="number" id="balloonPercentage" min="0" max="100" step="0.1" placeholder="Enter balloon percentage">
+                                <span class="percentage">%</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <div class="input-group">
+                                <input type="number" id="interestRate" required min="0.1" step="0.1" placeholder="Enter interest rate">
+                                <span class="percentage">%</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (months)</label>
+                            <input type="number" id="loanTerm" required min="1" step="1" placeholder="Enter loan term">
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Timing</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="paymentTiming" value="advance" required> Advance
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="paymentTiming" value="arrears" checked> Arrears
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+
+                <div id="results" class="results hidden">
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <h3>Monthly Payment</h3>
+                            <p id="monthlyPayment">$0.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Interest</h3>
+                            <p id="totalInterest">$0.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Balloon Payment</h3>
+                            <p id="balloonAmount">$0.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Amount</h3>
+                            <p id="totalAmount">$0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="payment-schedule">
+                        <button id="downloadCSV" class="download-btn">Download Payment Schedule (CSV)</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Payment Date</th>
+                                    <th>Payment Amount</th>
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Remaining Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="footer-note">
+                        Note: Calculations are based on fixed interest rate and regular monthly payments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Format currency inputs with commas
+            const currencyInputs = ['vehiclePrice', 'downPayment'];
+            currencyInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                input.addEventListener('input', function(e) {
+                    let value = this.value.replace(/[^\d]/g, '');
+                    if (value) {
+                        value = parseInt(value).toLocaleString('en-US');
+                    }
+                    this.value = value;
+                });
+            });
+
+            // Loan type change handler
+            document.getElementById('loanType').addEventListener('change', function() {
+                const paymentTimingRadios = document.querySelectorAll('input[name="paymentTiming"]');
+                const advanceRadio = document.querySelector('input[name="paymentTiming"][value="advance"]');
+                const arrearsRadio = document.querySelector('input[name="paymentTiming"][value="arrears"]');
+                
+                if (this.value === 'lease') {
+                    // For lease, force advance payment and disable radio buttons
+                    advanceRadio.checked = true;
+                    paymentTimingRadios.forEach(radio => {
+                        radio.disabled = true;
+                    });
+                } else {
+                    // For CHP, enable radio buttons
+                    paymentTimingRadios.forEach(radio => {
+                        radio.disabled = false;
+                    });
+                }
+            });
+
+            // Form submission handler
+            document.getElementById('autoLoanForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateLoan();
+            });
+
+            // Reset button handler
+            document.getElementById('resetBtn').addEventListener('click', resetCalculator);
+
+            // Download CSV handler
+            document.getElementById('downloadCSV').addEventListener('click', downloadPaymentSchedule);
+
+            function calculateLoan() {
+                // Get input values and remove commas from currency inputs
+                const vehiclePrice = parseFloat(document.getElementById('vehiclePrice').value.replace(/,/g, '')) || 0;
+                const downPayment = parseFloat(document.getElementById('downPayment').value.replace(/,/g, '')) || 0;
+                const balloonPercentage = parseFloat(document.getElementById('balloonPercentage').value) || 0;
+                const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+                const loanTerm = parseInt(document.getElementById('loanTerm').value) || 0;
+                const isAdvance = document.querySelector('input[name="paymentTiming"][value="advance"]').checked;
+
+                // Validation
+                if (vehiclePrice <= 0) {
+                    alert('Please enter a valid vehicle price');
+                    return;
+                }
+
+                if (downPayment < 0) {
+                    alert('Down payment cannot be negative');
+                    return;
+                }
+
+                if (downPayment >= vehiclePrice) {
+                    alert('Down payment cannot exceed vehicle price');
+                    return;
+                }
+
+                if (balloonPercentage < 0 || balloonPercentage > 100) {
+                    alert('Balloon percentage must be between 0 and 100');
+                    return;
+                }
+
+                if (interestRate <= 0) {
+                    alert('Please enter a valid interest rate');
+                    return;
+                }
+
+                if (loanTerm <= 0) {
+                    alert('Please enter a valid loan term');
+                    return;
+                }
+
+                // Calculate loan details
+                const balloonAmount = (vehiclePrice * balloonPercentage) / 100;
+                const loanAmount = vehiclePrice - downPayment;
+                const monthlyRate = interestRate / 100 / 12;
+
+                // Calculate monthly payment
+                const monthlyPayment = calculateMonthlyPaymentWithBalloon(
+                    loanAmount,
+                    monthlyRate,
+                    loanTerm,
+                    balloonAmount,
+                    isAdvance
+                );
+
+                // Generate schedule and calculate totals
+                const schedule = generateScheduleData(
+                    loanAmount,
+                    monthlyRate,
+                    loanTerm,
+                    monthlyPayment,
+                    balloonAmount,
+                    isAdvance,
+                    new Date()
+                );
+
+                const totalInterest = schedule.reduce((sum, payment) => sum + payment.interest, 0);
+                const totalAmount = schedule.reduce((sum, payment) => sum + payment.payment, 0);
+
+                // Display results
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+                document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+                document.getElementById('balloonAmount').textContent = formatCurrency(balloonAmount);
+                document.getElementById('totalAmount').textContent = formatCurrency(totalAmount + downPayment);
+
+                // Display schedule
+                displaySchedule(schedule);
+
+                // Scroll to results
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function calculateMonthlyPaymentWithBalloon(principal, monthlyRate, term, balloonAmount, isAdvance) {
+                if (monthlyRate === 0) {
+                    return (principal - balloonAmount) / term;
+                }
+
+                let pmt;
+                if (isAdvance) {
+                    // Payment in advance formula
+                    pmt = (principal - balloonAmount * Math.pow(1 + monthlyRate, -term)) * 
+                          (monthlyRate * Math.pow(1 + monthlyRate, term - 1)) / 
+                          (Math.pow(1 + monthlyRate, term) - 1);
+                } else {
+                    // Payment in arrears formula
+                    pmt = (principal - balloonAmount * Math.pow(1 + monthlyRate, -term)) * 
+                          (monthlyRate * Math.pow(1 + monthlyRate, term)) / 
+                          (Math.pow(1 + monthlyRate, term) - 1);
+                }
+
+                return pmt;
+            }
+
+            function generateScheduleData(principal, monthlyRate, term, monthlyPayment, balloonAmount, isAdvance, startDate) {
+                const schedule = [];
+                let balance = principal;
+                let currentDate = new Date(startDate);
+
+                // If payment in advance, add first payment at start
+                if (isAdvance) {
+                    currentDate = new Date(startDate);
+                    const interest = 0; // No interest for first payment in advance
+                    const principalPaid = monthlyPayment;
+                    balance -= principalPaid;
+
+                    schedule.push({
+                        date: new Date(currentDate),
+                        payment: monthlyPayment,
+                        principal: principalPaid,
+                        interest: interest,
+                        balance: balance
+                    });
+
+                    term--; // Reduce term by 1 as first payment is made at start
+                }
+
+                // Regular payments
+                for (let i = 1; i <= term; i++) {
+                    const interest = balance * monthlyRate;
+                    let payment = monthlyPayment;
+                    let principalPaid;
+
+                    // Handle balloon payment in the last month
+                    if (i === term && balloonAmount > 0) {
+                        payment = monthlyPayment + balloonAmount;
+                        principalPaid = balance;
+                        balance = 0;
+                    } else {
+                        principalPaid = monthlyPayment - interest;
+                        balance = balance - principalPaid;
+                    }
+
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+
+                    schedule.push({
+                        date: new Date(currentDate),
+                        payment: payment,
+                        principal: principalPaid,
+                        interest: interest,
+                        balance: Math.max(0, balance)
+                    });
+                }
+
+                return schedule;
+            }
+
+            function displaySchedule(schedule) {
+                const scheduleBody = document.getElementById('scheduleBody');
+                scheduleBody.innerHTML = '';
+                
+                schedule.forEach(payment => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${payment.date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        })}</td>
+                        <td>${formatCurrency(payment.payment)}</td>
+                        <td>${formatCurrency(payment.principal)}</td>
+                        <td>${formatCurrency(payment.interest)}</td>
+                        <td>${formatCurrency(payment.balance)}</td>
+                    `;
+                    scheduleBody.appendChild(row);
+                });
+            }
+
+            function downloadPaymentSchedule() {
+                const table = document.querySelector('.payment-schedule table');
+                let csv = 'Payment Date,Payment Amount,Principal,Interest,Remaining Balance\n';
+                
+                const rows = table.querySelectorAll('tr');
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].querySelectorAll('td');
+                    const rowData = Array.from(cells).map(cell => cell.textContent.replace(/,/g, '')).join(',');
+                    csv += rowData + '\n';
+                }
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.setAttribute('hidden', '');
+                a.setAttribute('href', url);
+                a.setAttribute('download', 'payment_schedule.csv');
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            function resetCalculator() {
+                document.getElementById('autoLoanForm').reset();
+                document.getElementById('results').classList.add('hidden');
+                
+                // Trigger loan type change event to reset payment timing options
+                document.getElementById('loanType').dispatchEvent(new Event('change'));
+            }
+
+            function formatCurrency(number) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(number);
+            }
+
+            // Trigger loan type change event on page load to set initial state
+            document.getElementById('loanType').dispatchEvent(new Event('change'));
+        });
+    </script>
+</body>
+</html>
