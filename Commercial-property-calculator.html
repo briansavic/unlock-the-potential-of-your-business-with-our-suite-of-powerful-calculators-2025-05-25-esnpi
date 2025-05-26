@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Commercial Property Loan Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -238,6 +239,169 @@
                 width: 100%;
             }
         }
+
+        /* Added for new sections */
+        .info-section {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background-color: var(--card-background);
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px -1px rgb(0 0 0 / 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-section h2 i.fas { /* Be specific for Font Awesome icons */
+            margin-right: 0.75rem;
+            font-size: 1.1em; 
+            color: var(--primary-color); /* Ensure icon color matches */
+        }
+
+        .info-section p, .info-section ul {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .info-section .example-box {
+            background-color: #e0e7ff; /* Lighter blue for example */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem; /* Added margin bottom */
+        }
+        
+        .info-section .example-box p {
+            color: #3730a3; /* Darker blue for example text */
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .disclaimer-box {
+            background-color: #fef3c7; /* Lighter yellow for disclaimer */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #f59e0b; /* Amber color */
+            margin-bottom: 1rem; /* Added margin bottom */
+        }
+        
+        .disclaimer-box p {
+            color: #92400e; /* Darker amber for disclaimer text */
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .disclaimer-box h2 i.fas { /* Specific for disclaimer icon */
+             color: #f59e0b; /* Amber icon color */
+        }
+
+
+        .other-calculators-list {
+            list-style: none;
+            padding-left: 0;
+            columns: 2; /* Display links in two columns */
+            gap: 1rem;
+        }
+
+        .other-calculators-list li {
+            margin-bottom: 0.6rem;
+            break-inside: avoid-column; /* Prevent items from breaking across columns */
+        }
+
+        .other-calculators-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .other-calculators-list a:hover {
+            color: #1d4ed8; 
+            text-decoration: underline;
+        }
+
+        /* CTA Section Styles (adapted from user's index.html) */
+        .cta-section-container { /* A wrapper for the CTA to be placed within calculator-body */
+             margin-top: 2.5rem;
+        }
+        .cta-section {
+            padding: 2.5rem 1.5rem; 
+            background-color: var(--primary-color); 
+            color: white;
+            border-radius: 0.75rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .cta-section .background-image-container { 
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .cta-section .background-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1; /* Default opacity for background image */
+        }
+
+        .cta-section .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 1.75rem; 
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white; 
+        }
+        
+        .cta-section h2 i.fas { /* Reset icon styling if used in CTA h2 */
+             margin-right: 0;
+             font-size: 1em;
+             color: white; /* Ensure CTA icon is white if used */
+        }
+
+        .cta-section p {
+            font-size: 1.05rem; /* Slightly adjusted size */
+            margin-bottom: 1.25rem; /* Adjusted margin */
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px; /* Limit width for readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.85rem 2.25rem; /* Slightly larger padding */
+            background-color: white;
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 9999px; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .cta-btn:hover {
+            background-color: #f8fafc; /* Lighter white/gray */
+            color: #1d4ed8; /* Darker primary on hover */
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
     </style>
 </head>
 <body>
@@ -318,9 +482,56 @@
                         Note: Calculations are based on a fixed interest rate and monthly payments
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <!-- How to Use Section -->
+                <div class="info-section">
+                    <h2><i class="fas fa-info-circle"></i>How to Use</h2>
+                    <p>Enter the loan amount, interest rate, and loan term to calculate your monthly mortgage payment.</p>
+                    <div class="example-box">
+                        <p><strong>Example:</strong><br>
+                        Loan Amount: $500,000, Interest Rate: 4.5%, Loan Term: 20 years = Monthly Payment ≈ $3,167.79</p>
+                    </div>
+                </div>
+
+                <!-- Financial Disclaimer Section -->
+                <div class="info-section disclaimer-box">
+                    <h2><i class="fas fa-shield-alt"></i>Financial Disclaimer</h2>
+                    <p>This calculator provides estimates based on the information you input and is for illustrative purposes only. It does not constitute financial advice. Consult with a financial advisor for personalized advice.</p>
+                </div>
+
+                <!-- Other Calculators Section -->
+                <div class="info-section">
+                    <h2><i class="fas fa-calculator"></i>Other Calculators</h2>
+                    <ul class="other-calculators-list">
+                        <li><a href="auto_loan_calculator.html">Auto Loan Calculator</a></li>
+                        <li><a href="term-loan-calculator.html">Term Loan Calculator</a></li>
+                        <li><a href="invoice-discount-calculator.html">Invoice Discount Finance Calculator</a></li>
+                        <li><a href="line-of-credit-calculator.html">Line of Credit Calculator</a></li>
+                        <li><a href="equipment-finance-calculator.html">Equipment Finance Calculator</a></li>
+                        <li><a href="index.html#commercial-calculators">View All Calculators on Homepage</a></li>
+                    </ul>
+                </div>
+
+                <!-- CTA Section Container -->
+                <div class="cta-section-container">
+                    <section class="cta-section">
+                        <div class="background-image-container">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000" alt="Background">
+                        </div>
+                        <div class="content-wrapper">
+                            <h2>Ready to Turn Your Calculations into Reality?</h2>
+                            <p>You've taken the first step by using our business calculator to explore your financial possibilities. Now, let's make those numbers work for you!</p>
+                            <p>Speak with one of our experienced commercial finance professionals to develop a custom strategy tailored to your business needs. Discover how you can secure the funding necessary to achieve your business goals and drive success.</p>
+                            <p>Contact us today to schedule your personalized consultation!</p>
+                            <a href="briansavic.com" class="cta-btn">
+                                Get Started Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div> <!-- End of calculator-body -->
+        </div> <!-- End of calculator-card -->
+    </div> <!-- End of container -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
