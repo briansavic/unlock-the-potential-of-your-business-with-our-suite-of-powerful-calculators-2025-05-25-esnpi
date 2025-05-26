@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Loan Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #4338ca;
             --primary-hover: #3730a3;
-            --secondary-color: #e5e7eb;
+            --secondary-color: #e5e7eb; /* Used for btn-secondary bg */
+            --secondary-text-color: #64748b; /* For general secondary text like in info sections */
             --success-color: #059669;
             --text-color: #1f2937;
-            --light-bg: #f3f4f6;
+            --light-bg: #f3f4f6; /* Used for summary cards, table header */
             --white: #ffffff;
+            --card-background: #ffffff; /* Explicitly for main card */
+            --border-color: #e2e8f0; /* For general borders */
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
@@ -37,7 +41,7 @@
         }
 
         .calculator-card {
-            background: var(--white);
+            background: var(--card-background);
             border-radius: 1.5rem;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -47,6 +51,11 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
             padding: 2rem;
             color: var(--white);
+        }
+        .header h1 { /* Added for consistency */
+            font-size: 1.75rem; /* Slightly larger */
+            font-weight: 700;
+            text-align: center;
         }
 
         .calculator-body {
@@ -78,18 +87,23 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
+            color: var(--secondary-text-color);
         }
 
         input, select {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid #e5e7eb;
+            border: 2px solid var(--border-color);
             border-radius: 0.5rem;
             font-size: 1rem;
         }
 
         input[type="text"] {
-            padding-left: 2rem;
+            padding-left: 2.5rem; /* Adjusted for currency symbol */
+        }
+        input:focus, select:focus { /* Added for consistency */
+            outline: none;
+            border-color: var(--primary-color);
         }
 
         .button-group {
@@ -174,7 +188,7 @@
         th, td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         th {
@@ -212,6 +226,167 @@
             .calculator-body {
                 padding: 1.5rem;
             }
+        }
+
+        /* Added for new sections */
+        .info-section {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background-color: var(--card-background);
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px -1px rgb(0 0 0 / 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-section h2 i.fas { 
+            margin-right: 0.75rem;
+            font-size: 1.1em; 
+            color: var(--primary-color); 
+        }
+
+        .info-section p, .info-section ul {
+            margin-bottom: 1rem;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .info-section .example-box {
+            background-color: #e0e7ff; 
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem; 
+        }
+        
+        .info-section .example-box p {
+            color: #3730a3; 
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .disclaimer-box {
+            background-color: #fef3c7; 
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #f59e0b; 
+            margin-bottom: 1rem; 
+        }
+        
+        .disclaimer-box p {
+            color: #92400e; 
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .disclaimer-box h2 i.fas { 
+             color: #f59e0b; 
+        }
+
+        .other-calculators-list {
+            list-style: none;
+            padding-left: 0;
+            columns: 2; 
+            gap: 1rem;
+        }
+
+        .other-calculators-list li {
+            margin-bottom: 0.6rem;
+            break-inside: avoid-column; 
+        }
+
+        .other-calculators-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .other-calculators-list a:hover {
+            color: var(--primary-hover); 
+            text-decoration: underline;
+        }
+
+        .cta-section-container { 
+             margin-top: 2.5rem;
+        }
+        .cta-section {
+            padding: 2.5rem 1.5rem; 
+            background-color: var(--primary-color); 
+            color: white;
+            border-radius: 0.75rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-section .background-image-container { 
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .cta-section .background-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1; 
+        }
+
+        .cta-section .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 1.75rem; 
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white; 
+        }
+        
+        .cta-section h2 i.fas { 
+             margin-right: 0;
+             font-size: 1em;
+             color: white; 
+        }
+
+        .cta-section p {
+            font-size: 1.05rem; 
+            margin-bottom: 1.25rem; 
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.85rem 2.25rem; 
+            background-color: white;
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 9999px; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .cta-btn:hover {
+            background-color: #f8fafc; 
+            color: var(--primary-hover); 
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
     </style>
 </head>
@@ -290,9 +465,56 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <!-- How to Use Section -->
+                <div class="info-section">
+                    <h2><i class="fas fa-info-circle"></i>How to Use</h2>
+                    <p>Enter the loan amount, annual interest rate, loan term in years, start date, and payment frequency to calculate your business term loan payments.</p>
+                    <div class="example-box">
+                        <p><strong>Example:</strong><br>
+                        Loan Amount: $100,000, Interest Rate: 5.0%, Loan Term: 5 years, Start Date: (Today), Frequency: Monthly = Payment ≈ $1,887.12</p>
+                    </div>
+                </div>
+
+                <!-- Financial Disclaimer Section -->
+                <div class="info-section disclaimer-box">
+                    <h2><i class="fas fa-shield-alt"></i>Financial Disclaimer</h2>
+                    <p>This calculator provides estimates based on the information you input and is for illustrative purposes only. It does not constitute financial advice. Consult with a financial advisor for personalized advice.</p>
+                </div>
+
+                <!-- Other Calculators Section -->
+                <div class="info-section">
+                    <h2><i class="fas fa-calculator"></i>Other Calculators</h2>
+                    <ul class="other-calculators-list">
+                        <li><a href="Commercial-property-calculator.html">Commercial Property Calculator</a></li>
+                        <li><a href="1auto-loan-calculator.html">Auto Loan Calculator</a></li>
+                        <li><a href="invoice-discountingcalculator.html">Invoice Discount Finance Calculator</a></li>
+                        <li><a href="Line-of-credit-calculator.html">Line of Credit Calculator</a></li>
+                        <li><a href="equipment-finance-calculator.html">Equipment Finance Calculator</a></li>
+                        <li><a href="index.html#commercial-calculators">View All Calculators on Homepage</a></li>
+                    </ul>
+                </div>
+
+                <!-- CTA Section Container -->
+                <div class="cta-section-container">
+                    <section class="cta-section">
+                        <div class="background-image-container">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000" alt="Background">
+                        </div>
+                        <div class="content-wrapper">
+                            <h2>Ready to Turn Your Calculations into Reality?</h2>
+                            <p>You've taken the first step by using our business calculator to explore your financial possibilities. Now, let's make those numbers work for you!</p>
+                            <p>Speak with one of our experienced commercial finance professionals to develop a custom strategy tailored to your business needs. Discover how you can secure the funding necessary to achieve your business goals and drive success.</p>
+                            <p>Contact us today to schedule your personalized consultation!</p>
+                            <a href="briansavic.com" class="cta-btn">
+                                Get Started Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div> <!-- End of calculator-body -->
+        </div> <!-- End of calculator-card -->
+    </div> <!-- End of container -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -337,13 +559,13 @@
                 const startDate = new Date(document.getElementById('startDate').value);
 
                 // Validate inputs
-                if (!principal || !annualRate || !years) {
-                    alert('Please fill in all required fields');
+                if (isNaN(principal) || isNaN(annualRate) || isNaN(years) || !startDate) {
+                    alert('Please fill in all required fields with valid numbers and a date.');
                     return;
                 }
 
                 if (principal <= 0 || annualRate <= 0 || years <= 0 || years > 25) {
-                    alert('Please enter valid positive numbers (maximum 25 years)');
+                    alert('Please enter valid positive numbers (maximum 25 years for loan term).');
                     return;
                 }
 
@@ -370,8 +592,13 @@
                 }
 
                 // Calculate payment using the loan amortization formula
-                payment = (principal * ratePerPeriod * Math.pow(1 + ratePerPeriod, numberOfPayments)) / 
-                         (Math.pow(1 + ratePerPeriod, numberOfPayments) - 1);
+                if (ratePerPeriod === 0) { // Handle zero interest rate
+                    payment = principal / numberOfPayments;
+                } else {
+                    payment = (principal * ratePerPeriod * Math.pow(1 + ratePerPeriod, numberOfPayments)) / 
+                             (Math.pow(1 + ratePerPeriod, numberOfPayments) - 1);
+                }
+                
 
                 // Calculate amortization schedule
                 let balance = principal;
@@ -382,7 +609,7 @@
                 for (let i = 1; i <= numberOfPayments; i++) {
                     const interest = balance * ratePerPeriod;
                     const principalPaid = payment - interest;
-                    balance = Math.max(0, balance - principalPaid);
+                    balance = Math.max(0, balance - principalPaid); // Ensure balance doesn't go negative
                     totalInterest += interest;
 
                     amortizationSchedule.push({
@@ -396,6 +623,17 @@
                     // Add months based on payment frequency
                     currentDate.setMonth(currentDate.getMonth() + paymentInterval);
                 }
+                
+                // Adjust last payment for precision
+                if (amortizationSchedule.length > 0) {
+                    let lastPayment = amortizationSchedule[amortizationSchedule.length - 1];
+                    if (lastPayment.remainingBalance !== 0 && Math.abs(lastPayment.remainingBalance) < 0.01) { // Small discrepancy
+                        lastPayment.principalPaid += lastPayment.remainingBalance;
+                        lastPayment.payment = lastPayment.principalPaid + lastPayment.interestPaid;
+                        lastPayment.remainingBalance = 0;
+                    }
+                }
+
 
                 displayResults();
             }
@@ -440,18 +678,22 @@
             }
 
             function downloadSchedule() {
+                if (amortizationSchedule.length === 0) {
+                    alert("Please calculate the loan first to generate a schedule.");
+                    return;
+                }
                 // Create CSV content
-                const headers = ['Payment Date,Payment,Principal,Interest,Remaining Balance\n'];
+                const headers = 'Payment Date,Payment,Principal,Interest,Remaining Balance\n';
                 const csvContent = amortizationSchedule.map(row => 
                     `${formatDate(row.date)},${row.payment.toFixed(2)},${row.principalPaid.toFixed(2)},${row.interestPaid.toFixed(2)},${row.remainingBalance.toFixed(2)}`
                 ).join('\n');
 
                 // Create and download file
-                const blob = new Blob([headers + csvContent], { type: 'text/csv' });
+                const blob = new Blob([headers + csvContent], { type: 'text/csv;charset=utf-8;' });
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'amortization-schedule.csv';
+                a.download = 'business_loan_amortization_schedule.csv';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
