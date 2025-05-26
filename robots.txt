@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://businessloancalculator.com.au/sitemap.xml
