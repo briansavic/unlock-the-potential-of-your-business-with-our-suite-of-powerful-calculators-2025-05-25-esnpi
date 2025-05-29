@@ -76,19 +76,60 @@
                     <a href="https://briansavic.github.io/unlock-the-potential-of-your-business-with-our-suite-of-powerful-calculators-2025-05-25-esnpi/blog/business-loans-calculator-simulator-20250529-kc8.html" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">Read More</a>
                 </div>
 
-                [Previous 7 blog entries remain exactly as they were...]
 
             </div>
         </div>
     </section>
 
     <footer class="bg-gray-900 text-gray-300 py-16">
-        [Footer content remains exactly as in original...]
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">BusinessLoansCalculator.com</h3>
+                    <p class="text-sm">Empowering your financial decisions with precise and easy-to-use calculators.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://briansavic.github.io/unlock-the-potential-of-your-business-with-our-suite-of-powerful-calculators-2025-05-25-esnpi" class="hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="https://briansavic.github.io/unlock-the-potential-of-your-business-with-our-suite-of-powerful-calculators-2025-05-25-esnpi/blog.html" class="hover:text-blue-400 transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; <span id="currentYear"></span> BusinessLoansCalculator.com. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        [Scripts remain exactly as in original...]
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic year for footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
