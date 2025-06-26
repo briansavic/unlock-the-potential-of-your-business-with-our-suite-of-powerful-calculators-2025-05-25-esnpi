@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Leads for Environmental Consultants</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .ribbon {
+            background: #ffffff;
+            color: #333;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 960px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        .header {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid #f39c12;
+        }
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-top: 10px;
+            color: #ecf0f1;
+        }
+        .property-info {
+            background: #34495e;
+            border: 1px solid #f39c12;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .property-info p {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .property-info a {
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .advertorial {
+            background: #fff;
+            padding: 2rem;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .brutal-truth-section {
+            background: #34495e;
+            color: #ffffff;
+            padding: 3rem;
+            border-radius: 10px;
+            border: 2px solid #e74c3c;
+            margin-bottom: 2rem;
+        }
+        .brutal-truth-section .section-title {
+            color: #e74c3c;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .brutal-truth-section .sub-title {
+            color: #ecf0f1;
+        }
+        .brutal-truth-section .info-box.con {
+            background-color: #2c3e50;
+            border-left-width: 10px;
+            border-left-color: #e74c3c;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .brutal-truth-section .info-box.con .stat {
+            color: #e74c3c;
+        }
+        .brutal-truth-section .info-box.con .label {
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+        .brutal-truth-section .info-box.con p:not(.stat):not(.label) {
+            color: #bdc3c7;
+        }
+
+        .how-we-deliver-section {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border: 2px solid #2ecc71;
+        }
+        .how-we-deliver-section .section-title {
+            color: #27ae60;
+        }
+        .how-we-deliver-section .sub-title {
+            color: #34495e;
+        }
+        .how-we-deliver-section .info-box.pro {
+            background-color: #ffffff;
+            border-left-width: 10px;
+            border-left-color: #2ecc71;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .how-we-deliver-section .info-box.pro .stat {
+            color: #2ecc71;
+        }
+        .how-we-deliver-section .info-box.pro .label {
+            color: #2c3e50;
+        }
+        .how-we-deliver-section .info-box.pro p:not(.stat):not(.label) {
+            color: #34495e;
+        }
+
+        .comparison-section {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border: 2px solid #f39c12;
+        }
+
+        .comparison-section .section-title {
+            color: #f39c12;
+        }
+
+        .comparison-section .sub-title {
+            color: #ecf0f1;
+        }
+
+        .comparison-section .comparison-table {
+            background-color: #34495e;
+            color: #ffffff;
+            border: 1px solid #f39c12;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .comparison-section .comparison-table th {
+            background-color: #f39c12;
+            color: #2c3e50;
+            font-size: 1.3rem;
+        }
+
+        .comparison-section .comparison-table td {
+            border-color: #4a6278;
+            padding: 20px;
+            font-size: 1.2rem;
+        }
+
+        .comparison-section .comparison-table .your-way {
+            background-color: #e74c3c;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .comparison-section .comparison-table .our-way {
+            background-color: #2ecc71;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .comparison-section .your-way .price {
+            color: #ffffff;
+            font-size: 2.2rem;
+        }
+
+        .comparison-section .our-way .price {
+            color: #ffffff;
+            font-size: 2.2rem;
+        }
+
+        .comparison-section .check-mark { color: #ffffff; }
+        .comparison-section .cross-mark { color: #ffffff; }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        .sub-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .infographic-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: stretch;
+            margin-bottom: 3rem;
+        }
+        .info-box {
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+        }
+        .info-box.pro {
+            border-left-color: #2ecc71;
+        }
+        .info-box.con {
+            border-left-color: #e74c3c;
+        }
+        .info-box .stat {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .info-box .label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+        }
+        .comparison-table th {
+            background-color: #2c3e50;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+        }
+        .comparison-table td {
+            font-size: 1.1rem;
+        }
+        .comparison-table .your-way {
+            background-color: #f9eaea;
+        }
+        .comparison-table .our-way {
+            background-color: #eaf6fb;
+        }
+        .comparison-table .price {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .your-way .price { color: #e74c3c; }
+        .our-way .price { color: #2ecc71; }
+        .check-mark { color: #2ecc71; }
+        .cross-mark { color: #e74c3c; }
+        .offer-section {
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .offer-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #f39c12;
+        }
+        .offer-price {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .offer-price span {
+            font-size: 1.5rem;
+            font-weight: 400;
+            vertical-align: middle;
+        }
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #f39c12;
+            color: #2c3e50;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid #f39c12;
+        }
+        .cta-button:hover {
+            background: #fff;
+            color: #f39c12;
+        }
+        .scarcity {
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: #ecf0f1;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 1rem;
+        }
+        .logo-container img {
+            max-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ribbon">
+        <footer class="footer">
+            <div class="container">
+                <p>This offer is brought to you by:</p>
+                <div class="logo-container">
+                    <img src="goodnews_social_logo.png" alt="Goodnews Social Logo">
+                    <img src="briansavic_logo.png" alt="Brian Savic Logo">
+                </div>
+                <p style="margin-top: 2rem;">&copy; 2025 Brian Savic & Goodnews Social. All Rights Reserved. Stop wasting money and start getting results.</p>
+            </div>
+        </footer>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1>STOP Paying Google for Worthless Clicks!</h1>
+            <h2>An urgent message for Environmental Consultants who are sick and tired of wasting money on advertising that doesn't work.</h2>
+            <div class="property-info">
+                <p>We have two digital properties that have become available:</p>
+                <p><a href="https://asbestosremovalnewcastle.com.au" target="_blank">https://asbestosremovalnewcastle.com.au</a> & <a href="https://asbestostestingnewcastle.com.au" target="_blank">https://asbestostestingnewcastle.com.au</a></p>
+                <p>These sites are currently producing leads via form submission and calls. A new phone number will be provided by us and redirected to you.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="advertorial">
+            <div class="brutal-truth-section">
+                <h2 class="section-title">The Brutal Truth About Finding New Clients</h2>
+                <p class="sub-title">If you're like most environmental consulting firms, you're caught in a frustrating cycle. You know you need a steady stream of new projects to grow, but the old methods are bleeding you dry. You pour money into Google PPC, fighting over keywords that cost anywhere from $2 to over $9 per click, only to attract unqualified traffic and tire-kickers.</p>
+
+                <div class="infographic-section">
+                    <div class="info-box con">
+                        <p class="stat">7.5%</p>
+                        <p class="label">Is Google's BEST Conversion Rate</p>
+                        <p>This means 92.5% of the money you spend on clicks is utterly wasted.</p>
+                    </div>
+                    <div class="info-box con">
+                        <p class="stat">10-15x</p>
+                        <p class="label">Lower Conversion for Web Leads</p>
+                        <p>An interested prospect on the phone is infinitely more valuable than a form submission.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <h2 class="section-title">The "Pay-Per-Click" Shell Game vs. The "Pay-For-Results" Revolution</h2>
+                <p class="sub-title">For too long, Big Tech has sold you on a model that benefits them, not you. They make money every time someone clicks, regardless of whether they are a potential client or your competitor checking your. We're here to end that. We believe you should only pay when your phone rings with a real, potential customer on the line.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>The Old Way (Your Google PPC)</th>
+                            <th>The New Way (Our Pay-Per-Call System)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="your-way">
+                            <td><strong>Cost Per Click (Avg)</strong></td>
+                            <td>$5.00</td>
+                            <td>$0 - It's Irrelevant!</td>
+                        </tr>
+                        <tr class="our-way">
+                            <td><strong>You Pay For...</strong></td>
+                            <td>Every single click, good or bad <i class="fas fa-times-circle cross-mark"></i></td>
+                            <td>Qualified calls over 1 minute long <i class="fas fa-check-circle check-mark"></i></td>
+                        </tr>
+                        <tr class="your-way">
+                            <td><strong>Clicks Needed For 1 Lead</strong></td>
+                            <td>~14 Clicks (at 7.5% conversion)</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr class="our-way">
+                            <td><strong>TRUE Cost Per Qualified Lead</strong></td>
+                            <td class="price">$66.65</td>
+                            <td class="price">$47.00</td>
+                        </tr>
+                         <tr class="your-way">
+                            <td><strong>Financial Risk</strong></td>
+                            <td>100% on You</td>
+                            <td>100% on Us</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="how-we-deliver-section">
+                <h2 class="section-title">How We Deliver High-Value, Exclusive Leads</h2>
+                <p class="sub-title">We're not magicians. We are direct response marketing experts who use the same platforms, but with a radically different economic model. We absorb the cost and risk of advertising to find your next big client. You only get the finished product: a genuinely interested prospect on the phone.</p>
+                
+                <div class="infographic-section">
+                    <div class="info-box pro">
+                        <p class="stat">30%</p>
+                        <p class="label">Faster Conversion</p>
+                        <p>Phone leads close quicker because the intent is higher. They're ready to talk NOW.</p>
+                    </div>
+                    <div class="info-box pro">
+                        <p class="stat">28%</p>
+                        <p class="label">Higher Customer Spend</p>
+                        <p>Clients acquired through direct calls tend to be more valuable over their lifetime.</p>
+                    </div>
+                     <div class="info-box pro">
+                        <p class="stat">ZERO</p>
+                        <p class="label">Wasted Ad Spend</p>
+                        <p>Stop gambling on clicks. Invest only in tangible, qualified conversations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="offer-section">
+                <h2>Ready to Stop Gambling and Start Growing?</h2>
+                <p>This is your opportunity to lock in a steady stream of high-quality, exclusive leads for your environmental consulting business at a fixed price that makes your competition's marketing budget look insane.</p>
+                <div class="offer-price">
+                    $47 <span>/ per qualified lead</span>
+                </div>
+                <p>A qualified lead is a phone call lasting over 60 seconds or a detailed web form submission from a prospect in your service area. No exceptions. No fine print. You get a real opportunity, or you don't pay a dime.</p>
+                <div class="cta-container">
+                    <a href="tel:0439455003" class="cta-button"><i class="fas fa-phone-alt"></i> CALL NOW TO CLAIM THIS OFFER</a>
+                    <a href="mailto:brian@briansavic.com" class="cta-button"><i class="fas fa-file-alt"></i> OR, GET STARTED ONLINE</a>
+                </div>
+                <p class="scarcity">To ensure exclusivity and the highest lead quality for our partners, we are only accepting <strong>3 new environmental consulting firms</strong> this month.</p>
+            </div>
+
+            <!-- Placeholder for a lead form if needed -->
+            <div id="lead-form" style="margin-top: 2rem;">
+                 <!-- A real form would go here -->
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
